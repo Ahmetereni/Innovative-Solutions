@@ -18,3 +18,8 @@ set FLASK_APP=application && flask run
 cmd /K
 
 
+
+@REM For MACOSX
+export FLASK_APP=application
+flask run --debug
+
