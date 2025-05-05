@@ -190,7 +190,8 @@ def predict():
     }
   }
 
-    print(input_data)
+    print("innnnnn",input_data)
+    input_data=input_data['input']
 
     if input_data is None:
         return jsonify({'error': 'Invalid input format. Expected JSON with key "input".'}), 400
@@ -198,8 +199,9 @@ def predict():
     # Validate input
      # Vvalidate input data
     missing = [feat for feat in expected_features if feat not in input_data]
-    if missing:
-        return jsonify({'error': f'Missing required features: {missing}'}), 400
+    # if missing:
+    #     print("-missssssssss")
+    #     return jsonify({'error': f'Missing required features: {missing}'}), 400
 
     # drop unwanted features
     for feat in drop_features + [target_column]:
@@ -221,6 +223,7 @@ def predict():
         pred = model.predict(input_df)[0]
         prediction_label = "At Risk" if pred == 1 else "Doing Well"
     except Exception as e:
+        print(str(e))
         return jsonify({'error': f'Prediction failed: {str(e)}'}), 500
     
     print("Confidence",confidence)

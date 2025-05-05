@@ -1,74 +1,170 @@
-<!-- templates/search.html -->
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+
+{% block content %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-
+    <style>
+        /* Custom input size */
+        .custom-input {
+            width: 100px;
+            /* Adjust width */
+            height: 40px;
+            /* Adjust height */
+        }
+    </style>
 </head>
-<style>
-  input[type=text] {
-    text-align: center;
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-  }
-</style>
-
-<style>
-
-  a#item:hover {
-    /* display: inline-flex; */
-    padding: 15px;
-    background-color: #2a9d8f;
-    color: rgb(249, 140, 76);
-    border-radius: 23px;
-
-
-  }
-</style>
-
-
 
 <body>
-  <form method=post enctype=multipart/form-data>
-    <div class="field">
-      <div class="control">
-        <input class="input is-large" id="search" type="text" name="search" placeholder="Ask Your Question"
-          autofocus="">
-      </div>
-    </div>
+    <section class="section">
+        <div class="container">
+            <h2 class="title is-4">Multiple Patients Input</h2>
 
+            <div class="table-container box">
+                <table class="table is-bordered is-fullwidth is-hoverable is-striped" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>BloodPressure</th>
+                            <th>HeartAttack</th>
+                            <th>Diabetes</th>
+                            <th>TransplantType</th>
+                            <th>CRP</th>
+                            <th>IL-6</th>
+                            <th>WBC</th>
+                            <th>ESR</th>
+                            <th>Creatinine</th>
+                            <th>Hemoglobin</th>
+                            <th>Cholesterol</th>
+                            <th>BloodSugar</th>
+                            <th>PlateletCount</th>
+                            <th>ALT</th>
+                            <th>eGFR</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in data %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td><input class="input is-medium custom-input" type="number" value="{{ row.input.Age }}">
+                            </td>
 
-    <input id="btnsearch" class="button is-block is-info is-large is-fullwidth" type=submit value=Ask>
-    <p id="demo"></p>
+                            <!-- Gender Dropdown -->
+                            <td>
+                                <select class="input is-medium custom-input">
+                                    <option value="Male" {% if row.input.Gender=='Male' %}selected{% endif %}>Male
+                                    </option>
+                                    <option value="Female" {% if row.input.Gender=='Female' %}selected{% endif %}>Female
+                                    </option>
+                                </select>
+                            </td>
 
-    <hr>
+                            <td><input class="input is-medium custom-input" type="text"
+                                    value="{{ row.input.BloodPressure }}"></td>
+                            <td><input class="input is-medium custom-input" type="text"
+                                    value="{{ row.input.HeartAttack }}"></td>
+                            <td><input class="input is-medium custom-input" type="text"
+                                    value="{{ row.input.Diabetes }}"></td>
 
+                            <!-- Transplant Type Dropdown -->
+                            <td>
+                                <select class="input is-medium custom-input">
+                                    <option value="Kidney" {% if row.input.TransplantType=='Kidney' %}selected{% endif
+                                        %}>Kidney</option>
+                                    <option value="Liver" {% if row.input.TransplantType=='Liver' %}selected{% endif %}>
+                                        Liver</option>
+                                    <option value="Heart" {% if row.input.TransplantType=='Heart' %}selected{% endif %}>
+                                        Heart</option>
+                                    <option value="Lung" {% if row.input.TransplantType=='Lung' %}selected{% endif %}>
+                                        Lung</option>
+                                </select>
+                            </td>
 
-  </form>
+                            <td><input class="input is-medium custom-input" type="number" value="{{ row.input.CRP }}">
+                            </td>
+                            <td><input class="input is-medium custom-input" type="number"
+                                    value="{{ row.input['IL-6'] }}"></td>
+                            <td><input class="input is-medium custom-input" type="number" value="{{ row.input.WBC }}">
+                            </td>
+                            <td><input class="input is-medium custom-input" type="number" value="{{ row.input.ESR }}">
+                            </td>
+                            <td><input class="input is-medium custom-input" type="number"
+                                    value="{{ row.input.Creatinine }}"></td>
+                            <td><input class="input is-medium custom-input" type="number"
+                                    value="{{ row.input.Hemoglobin }}"></td>
+                            <td><input class="input is-medium custom-input" type="number"
+                                    value="{{ row.input.Cholesterol }}"></td>
+                            <td><input class="input is-medium custom-input" type="number"
+                                    value="{{ row.input.BloodSugar }}"></td>
+                            <td><input class="input is-medium custom-input" type="number"
+                                    value="{{ row.input.PlateletCount }}"></td>
+                            <td><input class="input is-medium custom-input" type="number" value="{{ row.input.ALT }}">
+                            </td>
+                            <td><input class="input is-medium custom-input" type="number" value="{{ row.input.eGFR }}">
+                            </td>
+                            <td>
+                                <button class="button is-info is-small"
+                                    onclick="submitRow({{ loop.index0 }})">Submit</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
 
-  {% for answer in answers %}
+    <script>
+        function submitRow(rowIndex) {
+            const tableRow = document.getElementById("dataTable").getElementsByTagName("tbody")[0].rows[rowIndex];
 
-  <div class="box" style="text-align: left;">
-    <p style="font-size: 25px;"><span style="color:coral;font-weight:bold">{{answer.answer}}</span></p><br>
-    <p style="font-size: 20px;">{{answer.context}}</p><br>
-    <p>Score: {{answer.score}}</p>
-    <p>Page Number: {{answer.meta["page"]}}</p>
+            const fields = [
+                "Age", "Gender", "BloodPressure", "HeartAttack", "Diabetes",
+                "TransplantType", "CRP", "IL-6", "WBC", "ESR", "Creatinine",
+                "Hemoglobin", "Cholesterol", "BloodSugar", "PlateletCount", "ALT", "eGFR"
+            ];
 
-    <!-- pdf linki -->
-    <p style="text-align: right;"><a id="item" target="_blank" style="font-size: 30px;text-align: right;padding: 10px; "
-        href=http://127.0.0.1:5000/view/{{answer.meta["name"]}}>{{answer.meta["name"]}}<img src="../static/pdfview.png"
-          alt="hello" height="30" width="30"></a></p>
-  </div>
-  {% endfor %}
+            const inputs = tableRow.querySelectorAll("input, select");  // Include select inputs as well
+            let patient = {};
+
+            inputs.forEach((input, i) => {
+                const val = input.value;
+                patient[fields[i]] = isNaN(val) || val === "" ? val : Number(val);
+            });
+
+            const result = { input: [patient] };
+
+            fetch('/submit-patient', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(result),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const atRiskConfidence = data?.confidence?.["At Risk"];
+                    const prediction = data?.prediction;
+
+                    alert(
+                        'Data successfully submitted!\n' +
+                        'Prediction: ' + prediction + '\n' +
+                        'Confidence: ' + atRiskConfidence
+                    );
+
+                    console.log('Server Response - Confidence (At Risk):', atRiskConfidence);
+                    console.log('Server Response - Prediction:', prediction);
+                })
+
+                .catch((error) => {
+                    alert('Error submitting data');
+                    console.error('Error:', error);
+                });
+        }
+    </script>
 </body>
 
 </html>
-
 {% endblock %}

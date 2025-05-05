@@ -20,6 +20,7 @@ cmd /K
 
 
 @REM For MACOSX
-export FLASK_APP=application
+export FLASK_APP=application && flask run --debug
+
 flask run --debug
 
