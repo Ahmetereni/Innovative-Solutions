@@ -9,13 +9,13 @@ if "%~1"=="-FIXED_CTRL_C" (
 )
 
 
-SQLALCHEMY_TRACK_MODIFICATIONS =false
-set FLASK_DEBUG=true
-set FLASK_APP=application && flask run
+@REM SQLALCHEMY_TRACK_MODIFICATIONS =false
+@REM set FLASK_DEBUG=true
+@REM set FLASK_APP=application && flask run
 
 
 
-cmd /K
+@REM cmd /K
 
 
 

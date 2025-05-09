@@ -1,1 +1,13 @@
-start "" "%ProgramFiles%\Git\git-bash.exe"
+[Unit]
+Description=Gunicorn instance to serve my Flask app
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/home/ubuntu/Innovative-Solutions
+ExecStart=/home/ubuntu/.venv/bin/gunicorn --bind 0.0.0.0:5000 "application:create_app()"
+
+
+[Install]
+WantedBy=multi-user.target
