@@ -23,7 +23,7 @@
                             {% if current_user.is_authenticated %}
                             <a href="{{ url_for('hay.search') }}" class="navbar-item"
                                 style="height: 100px;font-size: 40px;">
-                                View
+                                Sensor Data
                             </a>
                             {% endif %}
 
@@ -40,7 +40,7 @@
                             {% if current_user.is_authenticated %}
                             <a href="{{ url_for('main.view') }}" class="navbar-item"
                                 style="height: 100px;font-size: 40px;">
-                                Files
+                                Patients
                             </a>
                             {% endif %}
                             {% if current_user.is_authenticated %}
