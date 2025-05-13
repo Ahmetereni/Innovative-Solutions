@@ -3,7 +3,7 @@ git init
 num=$(( RANDOM % 1000 + 1 )) # generate a random number between 1-1000
 git add .
 git commit -m "Random commit #$num"
-echo "Do you want to upload to github overriding exisitng repo (y for yes) \c"
+echo "Do you want to upload to github overriding exisitng repo (y) \c"
 read answer
 if [ "$answer" = "y" ] || [ "$answer" = "Y" ]; then
    git remote add origin https://github.com/Ahmetereni/Innovative-Solutions.git
