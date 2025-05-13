@@ -13,6 +13,17 @@
             height: 40px;
             /* Adjust height */
         }
+
+        /* Add horizontal scrolling for table */
+        .table-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-top: 20px;
+        }
+
+        table {
+            min-width: 1500px; /* You can adjust this based on the number of columns */
+        }
     </style>
 </head>
 
@@ -136,7 +147,7 @@
                 patient[fields[i]] = isNaN(val) || val === "" ? val : Number(val);
             });
 
-            const result = { input: [patient] };
+            const result = { input: patient };
 
             fetch('/submit-patient', {
                 method: 'POST',

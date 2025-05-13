@@ -69,11 +69,11 @@ model = pipeline.fit(X_train, y_train)
 # evaluate accuracy
 y_pred = model.predict(X_test)
 acc = accuracy_score(y_test, y_pred)
-print(f"Model accuracy on test set: {acc:.2%}")
+# print(f"Model accuracy on test set: {acc:.2%}")
 
 # specify expected features for prediction
 expected_features = X.columns.tolist()
-print("Expected features:", expected_features)
+# print("Expected features:", expected_features)
 from flask_cors import CORS
 from flask import render_template
 # ======================= FLASK =======================
@@ -164,9 +164,10 @@ def predict():
 
     # # Expect JSON like: { "input": { "feature1": value1, ... } }
     req_data = request.get_json(force=True)
-    input_data = req_data.get('input')[0]
-    with open('test_cases.json','r') as f:
-        input_data=json.load(f)
+  
+#     input_data = req_data.get('input')[0]
+#     with open('test_cases.json','r') as f:
+#         input_data=json.load(f)
 
     input_data= {
     "input": {
@@ -189,9 +190,12 @@ def predict():
       "eGFR": 33.6
     }
   }
-
-    print("innnnnn",input_data)
-    input_data=input_data['input']
+    print("request:",req_data["input"])
+    print()
+#     # print("innnnnn",input_data)
+    input_data=req_data['input']
+    print("beklenen: ",input_data)
+    # input_data=req_data
 
     if input_data is None:
         return jsonify({'error': 'Invalid input format. Expected JSON with key "input".'}), 400
@@ -199,9 +203,9 @@ def predict():
     # Validate input
      # Vvalidate input data
     missing = [feat for feat in expected_features if feat not in input_data]
-    # if missing:
-    #     print("-missssssssss")
-    #     return jsonify({'error': f'Missing required features: {missing}'}), 400
+    if missing:
+        print("-missssssssss")
+        return jsonify({'error': f'Missing required features: {missing}'}), 400
 
     # drop unwanted features
     for feat in drop_features + [target_column]:
@@ -226,8 +230,8 @@ def predict():
         print(str(e))
         return jsonify({'error': f'Prediction failed: {str(e)}'}), 500
     
-    print("Confidence",confidence)
-    print("Confidence",prediction_label)
+    # print("Confidence",confidence)
+    # print("Confidence",prediction_label)
 
     # response
     return jsonify({

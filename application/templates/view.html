@@ -26,7 +26,7 @@
     color: white;
   }
 
-  #patient-data div.at-risk { 
+  #patient-data div.at-risk {
     background-color: #ffcccc;
     border-left: 5px solid #e60000;
     color: black;
@@ -66,9 +66,10 @@
           displayNames += `, ${atRiskPatients.length - 5} more…`;
         }
         setTimeout(() => {
-    alert(`⚠️ At-risk patients: ${displayNames}`);
-  }, 100);
-        // showBrowserNotification(`⚠️ At-risk patients: ${displayNames}`);
+          // alert(`⚠️ At-risk patients: ${displayNames}`);
+        showBrowserNotification(`⚠️ At-risk patients: ${displayNames}`);
+
+        }, 100);
       }
 
     } catch (error) {
