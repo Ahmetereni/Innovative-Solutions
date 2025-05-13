@@ -1,5 +1,5 @@
 Time,Age,Gender,BloodPressure,BiopsyResult,RejectionTime(Hrs),Infection,Complications,SuccessfulTransplant,Intervention,HeartAttack,Diabetes,TransplantType,TransplantYear,TransplantNeeded,CRP,IL-6,WBC,ESR,Creatinine,Hemoglobin,Cholesterol,BloodSugar,PlateletCount,ALT,eGFR,RejectionStatus
-0,55,Female,128.0,No Rejection,,1,1,0,Antibiotics,0,0,Kidney,2014,1,1.35,8.55,5.09,8.85,0.95,1,1,90.64,279.94,41.2,83.53,0
+0,57,Male,133.9,No Rejection,,1,1,0,Antibiotics,1,1,Kidney,2014,1,7.3,13.1,9.4,38.5,2.1,11.8,208.4,157.5,337.2,53.9,33.6,0
 1,77,Female,121.2,No Rejection,,1,1,0,Antibiotics,0,0,Kidney,2014,1,1.35,8.55,5.09,8.85,0.95,13.01,151.3,90.64,279.94,41.2,83.53,0
 2,53,Male,137.2,No Rejection,,0,0,1,None,1,0,Heart,2020,1,1.88,13.0,5.2,10.02,0.76,15.08,184.25,111.83,285.24,33.64,89.1,0
 3,66,Female,155.3,No Rejection,,0,0,1,None,0,0,Heart,2022,1,2.22,8.51,5.94,9.65,0.79,12.7,201.25,78.98,235.66,46.59,94.46,0
